@@ -4,14 +4,14 @@
 IMAGE_NAME="yidadaa/chatgpt-next-web"
 CONTAINER_NAME="chatgpt_next_web_container"
 
-# 检查是否已有同名容器存在
-EXISTING_CONTAINER=$(sudo docker ps -a --filter "name=$CONTAINER_NAME" --format "{{.Names}}")
+# 检查是否有正在运行的同名镜像的容器
+EXISTING_CONTAINER_ID=$(sudo docker ps -a -q -f ancestor="$IMAGE_NAME")
 
 # 如果存在，则停止并删除
-if [ ! -z "$EXISTING_CONTAINER" ]; then
+if [ ! -z "$EXISTING_CONTAINER_ID" ]; then
     echo "发现同名容器，正在停止并删除..."
-    sudo docker stop $CONTAINER_NAME
-    sudo docker rm $CONTAINER_NAME
+    sudo docker stop $EXISTING_CONTAINER_ID
+    sudo docker rm $EXISTING_CONTAINER_ID
 fi
 
 # 获取用户输入的 OpenAI API Key、密码和映射端口
