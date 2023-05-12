@@ -18,6 +18,7 @@ fi
 read -p "请输入您的 OpenAI API Key: " OPENAI_API_KEY
 read -p "请输入您想要的密码，以逗号分隔，最多不超过3个: " PASSWORDS
 read -p "请输入您希望映射到服务器的端口: " MAPPED_PORT
+read -p "请输入您的 BASE_URL: " BASE_URL
 
 # 拉取最新的镜像
 echo "拉取最新镜像..."
@@ -31,6 +32,7 @@ sudo docker run -d \
     -p $MAPPED_PORT:3000 \
     -e OPENAI_API_KEY="$OPENAI_API_KEY" \
     -e CODE="$PASSWORDS" \
+    -e BASE_URL="$BASE_URL" \
     $IMAGE_NAME
 
 # 检查容器状态
