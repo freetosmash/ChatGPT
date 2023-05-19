@@ -1,5 +1,24 @@
 #!/bin/bash
 
+# 设置 GitHub 用户名、仓库名和项目路径
+USER_NAME="Yidadaa"
+REPO_NAME="ChatGPT-Next-Web"
+PROJECT_PATH="/ChatGPT-Next-Web"
+
+# 获取 GitHub 上的最新版本
+API_RESPONSE=$(curl --silent "https://api.github.com/repos/$USER_NAME/$REPO_NAME/releases/latest")
+LATEST_VERSION=$(echo $API_RESPONSE | jq .tag_name -r)
+
+# 检查是否存在旧版本的项目文件夹，如果存在则删除
+if [ -d "$PROJECT_PATH" ]; then
+    echo "发现旧版本的项目文件夹，正在删除..."
+    rm -rf "$PROJECT_PATH"
+fi
+
+# 下载并解压新版本
+echo "正在下载新版本..."
+git clone --branch $LATEST_VERSION "https://github.com/$USER_NAME/$REPO_NAME.git" "$PROJECT_PATH"
+
 # 设置镜像和容器名称
 IMAGE_NAME="yidadaa/chatgpt-next-web"
 CONTAINER_NAME="chatgpt_next_web_container"
@@ -38,3 +57,4 @@ sudo docker run -d \
 # 检查容器状态
 echo "容器状态："
 sudo docker ps --filter "name=$CONTAINER_NAME"
+
