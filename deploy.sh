@@ -52,7 +52,7 @@ sudo docker run -d \
     -e OPENAI_API_KEY="$OPENAI_API_KEY" \
     -e CODE="$PASSWORDS" \
     -e BASE_URL="$BASE_URL" \
-    -e DISABLE_GPT4=1
+    -e DISABLE_GPT4=1 \
     $IMAGE_NAME
 
 # 检查容器状态
