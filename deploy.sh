@@ -53,7 +53,6 @@ sudo docker run -d \
     -e CODE="$PASSWORDS" \
     -e BASE_URL="$BASE_URL" \
     -e DISABLE_GPT4=0 \
-    -e AZURE_API_VERSION=2024-05-01-preview \
     $IMAGE_NAME
 
 # 检查容器状态
