@@ -49,7 +49,7 @@ sudo docker run -d \
     --name $CONTAINER_NAME \
     --restart always \
     -p $MAPPED_PORT:3000 \
-    -e AZURE_API_KEY="$OPENAI_API_KEY" \
+    -e OPENAI_API_KEY="$OPENAI_API_KEY" \
     -e CODE="$PASSWORDS" \
     -e BASE_URL="$BASE_URL" \
     -e DISABLE_GPT4=0 \
